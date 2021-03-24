@@ -36,16 +36,34 @@ class QuestionsController < ApplicationController
 
   # PATCH/PUT /questions/1 or /questions/1.json
   def update
-    respond_to do |format|
-      # byebug
-      if @question.update(question_params)
-        format.html { redirect_to @question, notice: "Question was successfully updated." }
-        format.json { render :show, status: :ok, location: @question }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
+    @question = Question.find_by(id: params[:id])
+    p "===☆====#{question_params[:image_name]}======"
+    p params
+    p "===========★=========="
+
+    if params[:image_name]
+      @question.image_name="#{@question.id}.jpg"
+      image=params[:image_name]
+      File.binwrite("public/#{@question.image_name}",image.read)
     end
+    
+    if @question.save
+      flash[:notice] = "ユーザー情報を編集しました"
+      redirect_to("/questions/#{@question.id}")
+    else
+      render("questions/edit")
+    end
+
+    # respond_to do |format|
+    #   # byebug
+    #   if @question.update(question_params)
+    #     format.html { redirect_to @question, notice: "Question was successfully updated." }
+    #     format.json { render :show, status: :ok, location: @question }
+    #   else
+    #     format.html { render :edit, status: :unprocessable_entity }
+    #     format.json { render json: @question.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /questions/1 or /questions/1.json
