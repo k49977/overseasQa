@@ -1,15 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>id:</strong>
-  <%= @question.id %>
-  <strong>内容:</strong>
-  <%= @question.content %>
-  <strong>ユーザーID:</strong>
-  <%= @question.user_id %>
+<p>1
+  <div>
+    <strong>id:</strong>
+    <%= @question.id %>
+  </div>
+  <div>
+    <strong>内容:</strong>
+    <%= @question.content %>
+  </div>
+  <div>
+    <strong>ユーザーID:</strong>
+    <%= @question.user_id %>
+  </div>
   <div>
     <strong>画像:</strong>
-      <%= image_tag "/#{@question.image_name}" %>
+    <%= image_tag "/#{@question.image_name}",class:"",:height => '400' %>
   </div>
 </p>
 

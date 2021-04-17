@@ -17,6 +17,11 @@
   </div>
 
   <p>画像</p>
+  <% if question.image_name %>
+  <div>
+    <%= image_tag "/#{question.image_name}",class:"",:height => '400' %>
+  </div>
+  <%end%>
   <input name="image_name" type="file">
 
   <%= form.hidden_field :user_id, :value => "1" %>
